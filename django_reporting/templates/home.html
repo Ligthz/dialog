@@ -1,0 +1,237 @@
+{% extends 'index.html' %}
+    {% block title %}Home{% endblock %}
+
+    {% block nav %}
+        <li><a href="/">Login</a> <i class="ion-ios-circle-filled color"></i></li>
+    {% endblock %}
+
+    {% block preloader %}
+            <!-- Preloader -->
+            <div id="preloader">
+                <div class="pre-container">
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Preloader -->
+    {% endblock %}
+
+    {% block jq %}
+        {%load static %}
+        <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+    {% endblock %}
+
+    {% block landing_script %}
+        <script>
+            function rgs(){
+                var id1 = $("#r_ic").val();
+                var password = $("#r_password").val();
+                var code = $("#code").val();
+                var site = $("#site").val();
+
+                var ic = id1;
+                var n = ic.length;
+                var site_check1 = code.indexOf("&");
+                var site_check2 = code.indexOf("#");
+                var site_check3 = code.indexOf(",");
+                var ic_check = ic.indexOf(",");
+                var ic_check1 = ic.indexOf("&");
+                var ic_check2 = ic.indexOf("#");
+                var ic_check3 = ic.indexOf("(");
+                var pass_check = password.indexOf(",");
+                var pass_check1 = password.indexOf("&");
+                var pass_check2 = password.indexOf("#");
+                var pass_check3 = password.indexOf("(");
+
+                if(code==""){
+                    $("#re").html("Please enter valid Activation Code.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+                else if(ic==""){
+                    $("#re").html("Please enter valid Username.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else if(password==""){
+                    $("#re").html("Please enter valid password.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else if(ic_check>-1||ic_check1>-1 || ic_check2>-1 || ic_check3>-1){
+                    $("#re").html("Forbidden Character in username.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else if(pass_check>-1||pass_check1>-1 || pass_check2>-1 || pass_check3>-1){
+                    $("#re").html("Forbidden Character in password.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else if(site_check1>-1 || site_check2>-1 || site_check3>-1){
+                    $("#re").html("Forbidden Character in Activation Code.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else{
+                    document.getElementById('load1').style.display = 'none';
+                }
+            }
+            function rgs_open(){
+                document.getElementById('login_form').style.display = 'none'
+                document.getElementById('rgs_form').style.display = 'block'
+            }
+            function rgs_cancel(){
+                
+                document.getElementById('login_form').style.display = 'block'
+                document.getElementById('rgs_form').style.display = 'none'
+            }
+
+            function login() {
+                var id1 = $("#ic").val();
+                var password = $("#password").val();
+
+                var ic = id1;
+                var n = ic.length;
+
+                if(ic==""){
+                    $("#re").html("Please enter valid Username.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else if(password==""){
+                    $("#re").html("Please enter valid password.");
+                    $("#re").css("visibility", "visible");
+                    document.getElementById('load1').style.display = 'none';
+                }
+
+                else{
+                    document.getElementById('load1').style.display = 'none';
+                    window.location.href = '/login/?'+passing
+                }
+            }
+        </script>
+    {% endblock %}
+
+    {% block style %}
+        <style>
+            
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            background-color: #f44336;
+            color: black;
+            padding: 14px 20px;
+            margin: 8px 50px;
+            border: none;
+            cursor: pointer;
+            width: 45%;
+        }
+        .rgsbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 45%;
+        }
+
+        #re{
+            font-size:19px;
+        }
+
+        /* Extra styles for the cancel button */
+        .lgnbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0px;
+            border: none;
+            cursor: pointer;
+            width: 45%;
+        }
+        .container {
+            padding: 16px;
+        }
+        #rgs_form {
+            display: none;
+            padding: 16px;
+        }
+            
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 95%;
+            padding: 12px 20px;
+            margin: 8px 10px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        </style>
+    {% endblock %}    
+
+    {% block topbar %} Sawit Kinabalu LIMS {% endblock %}
+
+    {% block body %}
+        <h1 align="center" id="re"></h1>
+        <div id="id01" class = "container">
+            <p>{{result}}</p>
+            <div class="container" id="login_form" > 
+                <form class="modal-content animate" action='/login/' method="POST">
+                {% csrf_token %}
+                <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username ID" name="ic" id="ic" required>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                        <input type="submit" class="lgnbtn" id="b1" onClick="login()" value="Login">
+                        <br>
+                        <a type="button" id="b1" onClick="rgs_open()">Activate Account</a>
+                    </div>
+                </form>
+            </div>
+                
+            <div class="container" id="rgs_form"> 
+                <form class="modal-content animate" action='/register/' method="POST" >
+                {% csrf_token %}
+                <div class="container">
+                        <label for="code"><b>Activation Code</b></label>
+                        <input type="text" placeholder="Enter Activation Code" name="code" id="code" required>
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username ID" name="r_ic" id="r_ic" required>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="text" placeholder="Enter Password" name="r_password" id="r_password" required>
+                        <label for="site"><b>Please select site</b></label><br>
+                        <select name="site" id="site">
+                            <option value="ABM-Apas Balung Mill">ABM-Apas Balung Mill</option>
+                            <option value="KNM-Kunak Mill">KNM-Kunak Mill</option>
+                            <option value="LMM-Lumadan Mill">LMM-Lumadan Mill</option>
+                            <option value="LKM-Langkon Mill">LKM-Langkon Mill</option>
+                            <option value="SPGM-Sepagaya Mill">SPGM-Sepagaya Mill</option>
+                            <option value="SDM-Sandau Mill">SDM-Sandau Mill</option>
+                            <option value="SBRM-Sebrang Mill">SBRM-Sebrang Mill</option>
+                            <option value="SRDM-Kunak Refinery">SRDM-Kunak Refinery</option>
+                        </select><br>
+                        <input type="submit" class="lgnbtn" id="b2" onClick="rgs()" value="Register">
+                        <input type="button" class="cancelbtn" id="b3" onClick="rgs_cancel()" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+
+    
+    {% block footer %}
+        <div id="load1" align="center">
+            <div id="showData"></div>
+        </div>
+    {% endblock %}

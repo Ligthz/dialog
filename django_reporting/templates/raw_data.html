@@ -1,0 +1,75 @@
+{% extends 'landing_wo_load.html' %}
+    {% block title %}Table Result{% endblock %}
+
+
+    {% block header %}
+
+        
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    {% endblock %}
+
+    {% block landing %}
+        <!--------- Start tablulate--------->
+
+        <!--------- Start tablulate--------->
+        <div class="table100 ver5 m-b-110">
+            <h1><i class="fas fa-chalkboard-teacher"></i> Lab Instrument Management System </h1>
+            <p>{{t_show}}</p>
+            <hr>
+            {% block tabulate %}
+            {% endblock %}
+            <br>
+            <br>
+            <table id="table_id" border='2' align="center"  style="width:100%">
+            <!--------- Obtain raw data --------->
+            {% for res in result %}
+                <caption><i>Recorded Data</i></caption>
+
+                <!--------- tabulate header --------->
+                <thead>
+                <tr class="row100 head">
+                {% for cell in res.0 %}
+                    <th class="column100 column1" align="center">{{ cell }}</th>
+                {% endfor %}
+                </tr>
+                </thead>
+                <!--------- end header --------->
+                
+                <!--------- tabulate header --------->
+                <tbody>
+                {% for row in res.1 %}
+                <tr class="row100">
+                    {% for col in row %}
+                        <TD class="column100 column1" align="center">{{ col }}</TD>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% endfor %}    
+            <!--------- end obtain header --------->
+            </tbody>
+            </table>
+            <hr>
+
+            <!--------- js script --------->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+            <script>
+                $(document).ready( function () {
+                $('#table_id').DataTable({
+                dom: 'B<"clear">lfrtip',
+                buttons: {
+                    name: 'primary',
+                    buttons: [ 'copy' , 'csv','excel','pdf']
+                    }}
+                );
+            } );
+
+            </script>
+            <!--------- end js script --------->
+        </div>
+    {% endblock %}

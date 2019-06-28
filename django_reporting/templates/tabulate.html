@@ -1,0 +1,12 @@
+{% extends 'raw_data.html' %}
+    {% block tabulate %}
+        <script>
+            function pyfunction2(e) {
+                window.location.href = '/tabulate?set='+e+'&passport='+'{{passport}}'+'&all_input='+'{{all_input.0}},'+'{{all_input.1}},'+'{{all_input.2}},'+'{{all_input.3}},'+'{{all_input.4}},'+'{{all_input.5}},'+'{{all_input.6}},'+'{{all_input.7}},'+'{{all_input.8}}'
+            }
+        </script>
+
+        <button onclick="pyfunction2('avg')">Average</button>
+        <button onclick="pyfunction2('max')">Maximum</button>
+        <button onclick="pyfunction2('min')">Minimum</button>
+    {% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'landing_w_load.html' %}
+
+    {% block title %}Upload{% endblock %}
+    {% block topbar %} Upload File {% endblock %}
+
+
+    {% block landing %}
+        <style>
+            #up_word {
+                display: none;
+            }
+        </style>
+
+        <h1> LIMS Upload System</h1>
+        <br>
+        <p> Competent with zip file (.zip), excel file (.xlsx) or csv file (.csv). Reject any other format. </p>
+        <a> {{result}} </a>
+        <br>
+            <p>Please select Mill :  </p> 
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <select name="site" id="site">
+                    {% for sit in sites %}
+                        <option value="{{sit}}">{{sit}}</option>
+                    {% endfor %}
+                </select>
+            <br>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+            <input type="file" name="document">
+            <button type="submit" id="up_button" onclick="up_submit()">Upload</button>
+            <p id="up_word">Uploading file, this may take awhile if the file size is large.<br> Please wait and don't click refresh.</button>
+        </form>
+
+    <script>
+
+
+    function up_submit(){       
+        document.getElementById('up_button').style.display = 'None'
+        document.getElementById('up_word').style.display = 'block'
+    }
+
+    </script>
+
+        
+    {% endblock %}

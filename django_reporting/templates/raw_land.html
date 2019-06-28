@@ -1,0 +1,109 @@
+{% extends 'landing_w_load.html' %}
+    {% block title %}Raw Data{% endblock %}
+   
+
+    {% block landing %}
+
+        <br>
+        <h1><i class="fas fa-chalkboard-teacher"></i> LIMS Raw Data</h1>
+        <p>Select Data To Be Shown </p>
+        <br>
+        <p>{{result}}</p>
+        <br>
+        
+        <div style="width:800px;height:350px;border:1px solid #000;">
+        <br>
+        
+            
+        <p>&nbsp;&nbsp;&nbsp;Please select Mill :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please select date  </p> 
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <!-----Input site-->
+                &nbsp;&nbsp;&nbsp;
+                <select name="site" id="site">
+                    {% for sit in sites %}
+                        <option value="{{sit}}">{{sit}}</option>
+                    {% endfor %}
+                </select>
+                <!-----Make space-->
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                 <!-----Input date-->
+                &nbsp;&nbsp;&nbsp;
+                <input type="date" id="date1" name="date1" min="2010-01-01" max="2090-12-31">
+                &nbsp;&nbsp;&nbsp;
+                <input type="date" id="date2" name="date2" min="2010-01-01" max="2090-12-31">
+                <br><br><br><br>
+
+                <!-----Input sample type-->
+                &nbsp;&nbsp;&nbsp;
+                <label for="sample1"><b>Select sample to be Tabulate (Leave it for select all)</b></label><br>
+                &nbsp;&nbsp;&nbsp;
+                <label for="sample1"><b>Sample 1</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="sample1" id="sample1">
+                    <!----option value="All">All</option>-->
+                    {% for samp in sample %}
+                        <option value="{{samp}}">{{samp}}</option>
+                    {% endfor %}
+                </select>
+                <!----
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="sample2"><b>Sample 2</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="sample2" id="sample2">
+                    <option value="None">--</option>
+                    {% for samp in sample %}
+                        <option value="{{samp}}">{{samp}}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="sample3"><b>Sample 3</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="sample3" id="sample3">
+                    <option value="None">--</option>
+                    {% for samp in sample %}
+                        <option value="{{samp}}">{{samp}}</option>
+                    {% endfor %}
+                </select>
+                <br><br><br><br>-->
+                
+                <!-----Input parameter type
+                &nbsp;&nbsp;&nbsp;
+                <label for="parameter1"><b>Select Parameter to be Tabulate (Leave it for select all)</b></label><br>
+                &nbsp;&nbsp;&nbsp;
+                <label for="parameter1"><b>Parameter 1</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="parameter1" id="parameter1">
+                    <option value="All">All</option>
+                    {% for para in parameter %}
+                        <option value="{{para}}">{{para}}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="parameter2"><b>Parameter 2</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="parameter2" id="parameter2">
+                    <option value="None">--</option>
+                    {% for para in parameter %}
+                        <option value="{{para}}">{{para}}</option>
+                    {% endfor %}
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="parameter3"><b>Parameter 3</b></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="parameter3" id="parameter3">
+                    <option value="None">--</option>
+                    {% for para in parameter %}
+                        <option value="{{para}}">{{para}}</option>
+                    {% endfor %}
+                </select>-->
+            <br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" >Show Raw Data</button>
+        </form>
+    </div>
+    {% endblock %}

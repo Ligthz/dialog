@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+    {% block title %} Home {% endblock %}
+
+    {% block preloader %}
+    {% endblock %}
+
+    {% block landing_script %}
+    <script>
+        function pyfunction(e) {
+            window.location.href = '/'+e+'/?passport='+'{{passport}}'
+        }
+    </script>
+        {% block script %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block style %}
+        {% load static %}
+        
+        <link rel="stylesheet" href="{% static 'css/header=bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/header-templatemo-style.css'%}">
+
+    {% endblock %}
+
+    {% block header %}
+    {% endblock %}
+    
+    {% block topbar %} Sawit Kinabalu LIMS {% endblock %}
+
+    {% block nav %}
+        <li><a href="/console?passport={{passport}}">Home</a> <i class="ion-ios-circle-filled color"></i></li>
+        <li><a href="/upload?passport={{passport}}">Upload File</a> </li>
+        <li><a href="/raw?passport={{passport}}">Show Raw Data</a> </li>
+        <li><a href="/tabulate?passport={{passport}}">Table Result</a></li>
+        <li><a href="/remove?passport={{passport}}">Remove Data</a></li>
+    {% endblock %}
+
+    {% block body %}
+    <!----
+        <button onclick="pyfunction('console')">Main</button>
+        <button onclick="pyfunction('upload')">Upload File</button>
+        <button onclick="pyfunction('raw')">Raw Data</button>
+        <button onclick="pyfunction('tabulate')">Processed Data</button>
+        <button onclick="pyfunction('remove')">Remove Data</button>
+        ---->
+        <div class="cd-slider-nav">
+            <nav>
+              <span class="cd-marker item-1"></span>
+              <ul>
+                <li><a href="/console?passport={{passport}}"><div class="image-icon"><img src="{% static 'img/home-icon.png'%}"></div><p>Home</p></a></li>
+                <li><a href="/upload?passport={{passport}}"><div class="image-icon"><img src="{% static 'img/upload-icon.png'%}"></div><p>Upload File</p></a></li>
+                <li><a href="/raw?passport={{passport}}"><div class="image-icon"><img src="{% static 'img/raw-icon.png'%}"></div><p>Raw Data</p></a></li>
+                <li><a href="/tabulate?passport={{passport}}"><div class="image-icon"><img src="{% static 'img/data-icon.png'%}"></div><p>Processed Data</p></a></li>
+                <li><a href="/remove?passport={{passport}}"><div class="image-icon"><img src="{% static 'img/remove-icon.png'%}"></div><p>Remove Data</p></a></li>
+              </ul>
+            </nav> 
+          </div> <!-- .cd-slider-nav -->
+        
+        
+        <!----button onclick="pyfunction('graph')"-->
+        <p> {{landing_display}} </p>
+        {% block prelanding %}
+        {% endblock %}
+    {% endblock %}
+    
+    {% block footer %}
+        <div id="load1" align="center">
+            <div id="showData"></div>
+        </div>
+    {% endblock %}
